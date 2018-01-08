@@ -10,6 +10,7 @@ const OptionList = (props) => (
           <OptionEntry
           option={eachOption}
           key={index}
+          addToTotal={props.addToTotal}
           />
         </article>
       )

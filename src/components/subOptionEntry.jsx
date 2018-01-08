@@ -30,7 +30,7 @@ class SubOptionEntry extends Component {
     } else {
       return (
         <div className="sub-option-entry-container">
-          <div className="sub-option-name">
+          <div className="sub-option-name" onClick={() => {this.props.addToTotal(this.state.subOptionPrice)}}>
             {this.state.subOptionName}
           </div>
           <div className="sub-option-price">

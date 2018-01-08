@@ -21,6 +21,7 @@ class OptionEntry extends Component {
         <div className="sub-option-list">
           <SubOptionList
           subOptions={this.state.subOptions}
+          addToTotal={this.props.addToTotal}
           />
         </div>
       </div>

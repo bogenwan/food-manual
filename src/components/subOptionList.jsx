@@ -10,6 +10,7 @@ const SubOptionList = (props) => (
           <SubOptionEntry
           subOption={eachSubOption}
           key={index}
+          addToTotal={props.addToTotal}
           />
           <br/>
         </artical>
