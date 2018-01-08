@@ -9,22 +9,36 @@ class SubOptionEntry extends Component {
     this.state = {
       subOptionName: props.subOption.name,
       subOptionPrice: stringToCurrency(props.subOption.price),
-      subOptionavAvailable: props.subOption.available
+      subOptionavAvailable: props.subOption.available,
+      key: props.key
     };
   };
 
   render () {
-    console.log(typeof this.state.subOptionPrice)
-    return (
-      <div className="sub-option-entry-container">
-        <div className="sub-option-name">
-          {this.state.subOptionName}
+    console.log(this.state.key)
+    if (this.state.subOptionavAvailable === false) {
+      return (
+        <div className="sub-option-entry-container-fade">
+          <div className="sub-option-name">
+            {this.state.subOptionName}
+          </div>
+          <div className="sub-option-price">
+            {this.state.subOptionPrice}
+          </div>
         </div>
-        <div className="sub-option-price">
-          {this.state.subOptionPrice}
+      )
+    } else {
+      return (
+        <div className="sub-option-entry-container">
+          <div className="sub-option-name">
+            {this.state.subOptionName}
+          </div>
+          <div className="sub-option-price">
+            {this.state.subOptionPrice}
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
   };
 };
 

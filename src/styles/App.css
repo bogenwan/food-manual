@@ -47,6 +47,15 @@
   overflow: auto;
 }
 
+.sub-option-entry-container-fade {
+  width: 850px;
+  height: 100px;
+  padding-top: 35px;
+  margin-top: 10px;
+  overflow: auto;
+  opacity: 0.2;
+}
+
 .sub-option-name {
   display: inline-block;
   float: left;
