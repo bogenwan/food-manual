@@ -1,3 +1,61 @@
 .App {
   box-sizing: content-box;
 }
+
+.header {
+  width: auto;
+  height: 150px;
+  background-color: #FEF4DF;
+  text-align: center;
+}
+
+.food-name {
+  display: inline-block;
+  margin-top: 25px;
+  font-size: 75px;
+}
+
+.total-price {
+  float: right;
+  margin: 40px 50px 0px 0px;
+  font-size: 50px;
+}
+
+.option-container {
+  width: auto;
+  height: 400px;
+  /*border: 1px solid black;*/
+  text-align: center;
+}
+
+.option-name {
+  margin-top: 20px;
+  font-size: 50px;
+  text-decoration: underline;
+}
+
+.sub-option-list {
+  display: flex;
+  justify-content: center;
+}
+
+.sub-option-entry-container {
+  width: 850px;
+  height: 100px;
+  padding-top: 35px;
+  margin-top: 10px;
+  overflow: auto;
+}
+
+.sub-option-name {
+  display: inline-block;
+  float: left;
+  font-size: 40px;
+}
+
+.sub-option-price {
+  display: inline-block;
+  float: right;
+  font-size: 40px;
+}
+
