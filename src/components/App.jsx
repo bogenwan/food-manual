@@ -18,6 +18,7 @@ class App extends Component {
     // bind all function to this current scope so we don't loose context as we pass it down to child component
     this.addToTotal = this.addToTotal.bind(this);
     this.minusFromTotal = this.minusFromTotal.bind(this);
+    this.totalPriceClick = this.totalPriceClick.bind(this);
   };
 
   // this function will update state with option price added to the total amount once option name is clicked in child component also queue our option selection
@@ -55,12 +56,13 @@ class App extends Component {
   // similar to addToTotal this function will subtract the selected option price from total amount and dequeue options
   minusFromTotal (price, optionName, subOptionName) {
     let newStorage = Object.assign({}, this.state.selectionStorage);
-    if (newStorage[optionName].isEmpty()) {
+    // if selection queue is empty don't dequeue
+    if (!newStorage[optionName] || newStorage[optionName].isEmpty()) {
       console.log('you have no selection in this catagory!')
+      // if selection queue is with limit dont dequeue
     } else if (newStorage[optionName].length <= this.state.itemOptions.min) {
-      console.log(newStorage[optionName].length)
-      console.loh(this.state.itemOptions.min)
       console.log('you need to add at lease one option from this catagory.')
+      // otherwise dequeue the item
     } else {
       newStorage[optionName].dequeue();
       this.setState({
@@ -72,8 +74,12 @@ class App extends Component {
     });
   };
 
+  // function to handle total selection manager
+  totalPriceClick (e) {
+    console.log(e);
+  };
+
   render () {
-    console.log(this.state.selectionStorage)
     // pass down options state, add and minus function to child component
     return (
       <div className="App">
@@ -81,7 +87,7 @@ class App extends Component {
           <h1 className="food-name">
             {this.state.name}
           </h1>
-          <span className="total-price">
+          <span className="total-price" onClick={() =>{this.totalPriceClick(this.state.price)}}>
             {this.state.price}
           </span>
         </header>
