@@ -10,8 +10,27 @@ class SubOptionEntry extends Component {
       subOptionName: props.subOption.name,
       subOptionPrice: stringToCurrency(props.subOption.price),
       subOptionavAvailable: props.subOption.available,
-      subOptId: props.subOptId
+      subOptId: props.subOptId,
+      optionCount: 0
     };
+
+    // bind the method to this same scope
+    this.addOptionCount = this.addOptionCount.bind(this);
+    this.removeOptionCount = this.removeOptionCount.bind(this);
+  };
+
+  // this function adds counts of how many options selected
+  addOptionCount () {
+    this.setState({
+      optionCount: this.state.optionCount + 1
+    });
+  };
+
+  // this function remove counts of how many options selected
+  removeOptionCount () {
+    this.setState({
+      optionCount: this.state.optionCount - 1
+    });
   };
 
   render () {
@@ -30,15 +49,26 @@ class SubOptionEntry extends Component {
       return (
         <div className="sub-option-entry-container">
           <div className="sub-option-name"
-          onClick={() => {this.props.addToTotal(this.state.subOptionPrice)}}
+          onClick={() => {
+            this.props.addToTotal(this.state.subOptionPrice);
+            this.addOptionCount();
+          }}
           >
             {this.state.subOptionName}
           </div>
           <div className="sub-option-price"
-          onClick={() => {this.props.minusFromTotal(this.state.subOptionPrice)}}
+          onClick={() => {
+            this.props.minusFromTotal(this.state.subOptionPrice);
+            this.removeOptionCount();
+          }}
           >
-            {this.state.subOptionPrice}
+            + {this.state.subOptionPrice}
           </div>
+          {this.state.optionCount !== 0 ?
+              <div className="sub-option-count">{this.state.optionCount}</div>
+              :
+                null
+              }
         </div>
       )
     }

@@ -72,6 +72,14 @@
 .sub-option-price {
   display: inline-block;
   float: right;
+  margin-right: 20px;
   font-size: 40px;
+  border: 1px solid black;
 }
 
+.sub-option-count {
+  float: right;
+  margin-right: 10px;
+  font-size: 40px;
+  background-color: #FEF4DF;
+}
