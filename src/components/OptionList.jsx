@@ -9,8 +9,10 @@ const OptionList = (props) => (
         <article className="option-container">
           <OptionEntry
           option={eachOption}
+          optionId={index}
           key={index}
           addToTotal={props.addToTotal}
+          minusFromTotal={props.minusFromTotal}
           />
         </article>
       )

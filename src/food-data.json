@@ -26,12 +26,12 @@
       "items": [
           {
             "name": "milk tea",
-            "price": 0,
+            "price": 70,
             "avilable": true
           },
           {
              "name": "green milk tea",
-            "price": 0,
+            "price": 80,
             "avilable": true
           }
         ]

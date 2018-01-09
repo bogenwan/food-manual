@@ -9,8 +9,10 @@ const SubOptionList = (props) => (
         <artical className="sub-option-container">
           <SubOptionEntry
           subOption={eachSubOption}
+          subOptId={index}
           key={index}
           addToTotal={props.addToTotal}
+          minusFromTotal={props.minusFromTotal}
           />
           <br/>
         </artical>

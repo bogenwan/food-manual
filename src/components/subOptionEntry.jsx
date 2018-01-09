@@ -10,16 +10,15 @@ class SubOptionEntry extends Component {
       subOptionName: props.subOption.name,
       subOptionPrice: stringToCurrency(props.subOption.price),
       subOptionavAvailable: props.subOption.available,
-      key: props.key
+      subOptId: props.subOptId
     };
   };
 
   render () {
-    console.log(this.state.key)
     if (this.state.subOptionavAvailable === false) {
       return (
         <div className="sub-option-entry-container-fade">
-          <div className="sub-option-name">
+          <div className="sub-option-name-fade">
             {this.state.subOptionName}
           </div>
           <div className="sub-option-price">
@@ -30,10 +29,14 @@ class SubOptionEntry extends Component {
     } else {
       return (
         <div className="sub-option-entry-container">
-          <div className="sub-option-name" onClick={() => {this.props.addToTotal(this.state.subOptionPrice)}}>
+          <div className="sub-option-name"
+          onClick={() => {this.props.addToTotal(this.state.subOptionPrice)}}
+          >
             {this.state.subOptionName}
           </div>
-          <div className="sub-option-price">
+          <div className="sub-option-price"
+          onClick={() => {this.props.minusFromTotal(this.state.subOptionPrice)}}
+          >
             {this.state.subOptionPrice}
           </div>
         </div>

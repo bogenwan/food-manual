@@ -56,6 +56,13 @@
   opacity: 0.2;
 }
 
+.sub-option-name-fade {
+  display: inline-block;
+  float: left;
+  font-size: 40px;
+  pointer-events: none;
+}
+
 .sub-option-name {
   display: inline-block;
   float: left;

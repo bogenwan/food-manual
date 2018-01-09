@@ -7,7 +7,8 @@ class OptionEntry extends Component {
     super (props);
 
     this.state = {
-      eachOptions: props.option,
+      eachOption: props.option,
+      eachOptionId: props.optionId,
       subOptions: props.option.items
     };
   };
@@ -16,12 +17,13 @@ class OptionEntry extends Component {
     return (
       <div className="option-entry">
         <div className="option-name">
-          {this.state.eachOptions.name}
+          {this.state.eachOption.name}
         </div>
         <div className="sub-option-list">
           <SubOptionList
           subOptions={this.state.subOptions}
           addToTotal={this.props.addToTotal}
+          minusFromTotal={this.props.minusFromTotal}
           />
         </div>
       </div>
