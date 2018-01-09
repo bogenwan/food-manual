@@ -7,6 +7,7 @@ class SubOptionEntry extends Component {
     super (props);
 
     this.state = {
+      eachOptionName: props.eachOption.name,
       subOptionName: props.subOption.name,
       subOptionPrice: stringToCurrency(props.subOption.price),
       subOptionavAvailable: props.subOption.available,
@@ -34,6 +35,7 @@ class SubOptionEntry extends Component {
   };
 
   render () {
+    // check if option is available, if false opacity is 0.2 and unclickable, if ture, run the else statement
     if (this.state.subOptionavAvailable === false) {
       return (
         <div className="sub-option-entry-container-fade">
@@ -46,11 +48,17 @@ class SubOptionEntry extends Component {
         </div>
       )
     } else {
+      // run the below line of code if availability is true
       return (
+        // below click handler will return selected price, option name and sub-option name
         <div className="sub-option-entry-container">
           <div className="sub-option-name"
           onClick={() => {
-            this.props.addToTotal(this.state.subOptionPrice);
+            this.props.addToTotal(
+              this.state.subOptionPrice,
+              this.state.eachOptionName,
+              this.state.subOptionName
+              );
             this.addOptionCount();
           }}
           >
@@ -58,15 +66,21 @@ class SubOptionEntry extends Component {
           </div>
           <div className="sub-option-price"
           onClick={() => {
-            this.props.minusFromTotal(this.state.subOptionPrice);
+            this.props.minusFromTotal(
+              this.state.subOptionPrice,
+              this.state.eachOptionName,
+              this.state.subOptionName
+              );
             this.removeOptionCount();
           }}
           >
             + {this.state.subOptionPrice}
           </div>
           {this.state.optionCount !== 0 ?
+            // above line of code check if option count 0, if not, render the count
               <div className="sub-option-count">{this.state.optionCount}</div>
               :
+              // otherwise return null and don't render any option count
                 null
               }
         </div>

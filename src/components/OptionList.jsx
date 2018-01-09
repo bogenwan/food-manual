@@ -5,6 +5,7 @@ import OptionEntry from './OptionEntry.jsx';
 const OptionList = (props) => (
   <div className="option-list">
     {
+      // map out and render each options to the option entry component
       props.options.map((eachOption, index) =>
         <article className="option-container">
           <OptionEntry

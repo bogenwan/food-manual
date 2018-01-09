@@ -5,9 +5,11 @@ import SubOptionEntry from './subOptionEntry.jsx';
 const SubOptionList = (props) => (
   <div className="sub-option-list-container">
     {
+      // map out and render to each sub-option entry
       props.subOptions.map((eachSubOption, index) =>
-        <artical className="sub-option-container">
+        <div className="sub-option-container">
           <SubOptionEntry
+          eachOption={props.eachOption}
           subOption={eachSubOption}
           subOptId={index}
           key={index}
@@ -15,7 +17,7 @@ const SubOptionList = (props) => (
           minusFromTotal={props.minusFromTotal}
           />
           <br/>
-        </artical>
+        </div>
       )
     }
   </div>

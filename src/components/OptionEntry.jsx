@@ -14,6 +14,7 @@ class OptionEntry extends Component {
   };
 
   render () {
+    // this component render option name and sub-option list
     return (
       <div className="option-entry">
         <div className="option-name">
@@ -21,6 +22,7 @@ class OptionEntry extends Component {
         </div>
         <div className="sub-option-list">
           <SubOptionList
+          eachOption={this.state.eachOption}
           subOptions={this.state.subOptions}
           addToTotal={this.props.addToTotal}
           minusFromTotal={this.props.minusFromTotal}

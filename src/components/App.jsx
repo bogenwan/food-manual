@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import '../styles/App.css';
 import OptionList from './OptionList.jsx';
 import { stringToCurrency, numberCurrency } from '../util/helper-functions.js';
+import Queue from '../util/queue.js';
 
 class App extends Component {
   constructor (props) {
@@ -10,7 +11,8 @@ class App extends Component {
     this.state = {
       itemOptions: props.foodData.options,
       name: props.foodData.name,
-      price: stringToCurrency(props.foodData.price)
+      price: stringToCurrency(props.foodData.price),
+      queue: new Queue()
     };
 
     // bind all function to this current scope so we don't loose context as we pass it down to child component
@@ -19,21 +21,21 @@ class App extends Component {
   };
 
   // this function will update state with option price added to the total amount once option name is clicked in child component
-  addToTotal (e) {
-    // let oldPrice = numberCurrency(this.state.price, 2);
+  addToTotal (price, optionName, subOptionName) {
     this.setState({
-      price: numberCurrency(this.state.price, 2) + numberCurrency(e, 2)
+      price: numberCurrency(this.state.price, 2) + numberCurrency(price, 2)
     });
   };
 
   // similar to addToTotal this function will subtract the selected option price from total amount
-  minusFromTotal (e) {
+  minusFromTotal (price, optionName, subOptionName) {
     this.setState({
-      price: numberCurrency(this.state.price, 2) - numberCurrency(e, 2)
+      price: numberCurrency(this.state.price, 2) - numberCurrency(price, 2)
     });
   };
 
   render () {
+    // pass down options state, add and minus function to child component
     return (
       <div className="App">
         <header className="header">
