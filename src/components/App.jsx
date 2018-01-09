@@ -12,7 +12,7 @@ class App extends Component {
       itemOptions: props.foodData.options,
       name: props.foodData.name,
       price: stringToCurrency(props.foodData.price),
-      queue: new Queue()
+      selectionStorage: {}
     };
 
     // bind all function to this current scope so we don't loose context as we pass it down to child component
@@ -22,6 +22,25 @@ class App extends Component {
 
   // this function will update state with option price added to the total amount once option name is clicked in child component
   addToTotal (price, optionName, subOptionName) {
+    let newStorage = Object.assign({}, this.state.selectionStorage);
+    if (!this.state.selectionStorage[optionName]) {
+      newStorage[optionName] = new Queue();
+      newStorage[optionName].enqueue(subOptionName);
+      this.setState({
+        selectionStorage: newStorage
+      });
+    } else if (newStorage[optionName].length < this.state.itemOptions.max) {
+      newStorage[optionName].enqueue(subOptionName);
+      this.setState({
+        selectionStorage: newStorage
+      });
+    } else {
+      newStorage[optionName].dequeue();
+      newStorage[optionName].enqueue(subOptionName);
+      this.setState({
+        selectionStorage: newStorage
+      })
+    }
     this.setState({
       price: numberCurrency(this.state.price, 2) + numberCurrency(price, 2)
     });
@@ -35,6 +54,7 @@ class App extends Component {
   };
 
   render () {
+    console.log(this.state.selectionStorage)
     // pass down options state, add and minus function to child component
     return (
       <div className="App">
