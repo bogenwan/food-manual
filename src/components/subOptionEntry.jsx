@@ -79,9 +79,8 @@ class SubOptionEntry extends Component {
           {this.state.optionCount !== 0 ?
             // above line of code check if option count 0, if not, render the count
               <div className="sub-option-count">{this.state.optionCount}</div>
-              :
               // otherwise return null and don't render any option count
-                null
+              : null
               }
         </div>
       )
