@@ -3,15 +3,16 @@ import '../styles/App.css';
 import OptionList from './OptionList.jsx';
 import { stringToCurrency, numberCurrency } from '../util/helper-functions.js';
 import Queue from '../util/queue.js';
+import axios from 'axios';
 
 class App extends Component {
   constructor (props) {
     super (props);
 
     this.state = {
-      itemOptions: props.foodData.options,
-      name: props.foodData.name,
-      price: stringToCurrency(props.foodData.price),
+      itemOptions: '',
+      name: '',
+      price: 0,
       selectionStorage: {}
     };
 
@@ -19,6 +20,21 @@ class App extends Component {
     this.addToTotal = this.addToTotal.bind(this);
     this.minusFromTotal = this.minusFromTotal.bind(this);
     this.totalPriceClick = this.totalPriceClick.bind(this);
+  };
+
+  // this function will start getting data from api before component render
+  componentWillMount () {
+    // assign this to context to retain scope when being excecute bt axios
+    let context = this;
+    axios.get('/getData')
+    .then(function(response) {
+      context.setState({
+        itemOptions: response.data.options,
+        name: response.data.name,
+        price: stringToCurrency(response.data.price)
+      });
+    })
+    .catch((err) => console.log(err));
   };
 
   // this function will update state with option price added to the total amount once option name is clicked in child component also queue our option selection
@@ -80,8 +96,9 @@ class App extends Component {
   };
 
   render () {
+    // check if data from API returned and set to state yet, if yes render elements otherwise render null
+    return this.state.itemOptions ?
     // pass down options state, add and minus function to child component
-    return (
       <div className="App">
         <header className="header">
           <h1 className="food-name">
@@ -99,7 +116,7 @@ class App extends Component {
           />
         </div>
       </div>
-    );
+    : null;
   };
 };
 

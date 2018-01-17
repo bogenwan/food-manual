@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../styles/App.css';
 import SubOptionEntry from './subOptionEntry.jsx';
 
@@ -7,7 +7,7 @@ const SubOptionList = (props) => (
     {
       // map out and render to each sub-option entry
       props.subOptions.map((eachSubOption, index) =>
-        <div className="sub-option-container">
+        <div className="sub-option-container" key={index}>
           <SubOptionEntry
           eachOption={props.eachOption}
           subOption={eachSubOption}

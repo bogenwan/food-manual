@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import '../styles/App.css';
 import OptionEntry from './OptionEntry.jsx';
 
@@ -7,7 +7,7 @@ const OptionList = (props) => (
     {
       // map out and render each options to the option entry component
       props.options.map((eachOption, index) =>
-        <article className="option-container">
+        <article className="option-container" key={index}>
           <OptionEntry
           option={eachOption}
           optionId={index}
