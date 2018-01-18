@@ -4,6 +4,7 @@ import OptionList from './OptionList.jsx';
 import { stringToCurrency, numberCurrency } from '../util/helper-functions.js';
 import Queue from '../util/queue.js';
 import axios from 'axios';
+import _ from 'lodash';
 
 class App extends Component {
   constructor (props) {
@@ -13,13 +14,14 @@ class App extends Component {
       itemOptions: '',
       name: '',
       price: 0,
-      selectionStorage: {}
+      selectionStorage: {},
+      inRangeItemList: []
     };
 
     // bind all function to this current scope so we don't loose context as we pass it down to child component
     this.addToTotal = this.addToTotal.bind(this);
     this.minusFromTotal = this.minusFromTotal.bind(this);
-    this.totalPriceClick = this.totalPriceClick.bind(this);
+    this.checkOptionsWithinRange = this.checkOptionsWithinRange.bind(this);
   };
 
   // this function will start getting data from api before component render
@@ -91,11 +93,23 @@ class App extends Component {
   };
 
   // function to handle total selection manager
-  totalPriceClick (e) {
-    console.log(e);
+  checkOptionsWithinRange (e) {
+    let copySelectionStorage = Object.assign({}, this.state.selectionStorage);
+    let inRangeItemList = [];
+    let outOfRangeOptionList = [];
+    for (let key in copySelectionStorage) {
+      if (copySelectionStorage[key].length <= this.state.itemOptions[_.findIndex(this.state.itemOptions, {'name': `${key}`})].max) {
+        while (!copySelectionStorage[key].isEmpty()) {
+          inRangeItemList.push(copySelectionStorage[key].dequeue());
+        }
+      }
+    }
+    window.alert(inRangeItemList);
   };
 
   render () {
+    console.log('selection storage ==>', this.state.selectionStorage)
+    console.log('main options storage ==>', this.state.itemOptions)
     // check if data from API returned and set to state yet, if yes render elements otherwise render null
     return this.state.itemOptions ?
     // pass down options state, add and minus function to child component
@@ -104,7 +118,7 @@ class App extends Component {
           <h1 className="food-name">
             {this.state.name}
           </h1>
-          <span className="total-price" onClick={() =>{this.totalPriceClick(this.state.price)}}>
+          <span className="total-price" onClick={() =>{this.checkOptionsWithinRange(this.state.price)}}>
             {this.state.price}
           </span>
         </header>

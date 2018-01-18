@@ -22,6 +22,6 @@ app.get('/getData', (req, res) => {
   });
 });
 
-app.listen(8080, function () {
-  console.log('listening to port 8080');
+app.listen(8000, function () {
+  console.log('listening to port 8000');
 });
