@@ -94,22 +94,34 @@ class App extends Component {
 
   // function to handle total selection manager
   checkOptionsWithinRange (e) {
+    // helper function to create our of range list of options and it's min and max value
+    let maxAndMinInput = (option) => {
+      let currOptionIndex = _.findIndex(this.state.itemOptions, {'name': `${option}`});
+      return ` ${option}: min = ${this.state.itemOptions[currOptionIndex].min} max = ${this.state.itemOptions[currOptionIndex].max}`;
+    };
+
     let copySelectionStorage = Object.assign({}, this.state.selectionStorage);
     let inRangeItemList = [];
     let outOfRangeOptionList = [];
     for (let key in copySelectionStorage) {
-      if (copySelectionStorage[key].length <= this.state.itemOptions[_.findIndex(this.state.itemOptions, {'name': `${key}`})].max) {
+      let currMainOption = this.state.itemOptions[_.findIndex(this.state.itemOptions, {'name': `${key}`})];
+      // check each option selection if it is with-in range
+      if (copySelectionStorage[key].length <= currMainOption.max && copySelectionStorage[key].length >= currMainOption.min) {
+        // if with-in rage, create the items list
         while (!copySelectionStorage[key].isEmpty()) {
           inRangeItemList.push(copySelectionStorage[key].dequeue());
         }
+        // otherwise create the out of range item list
+      } else {
+        outOfRangeOptionList.push(key);
       }
     }
-    window.alert(inRangeItemList);
+    // if there are items in the out of range list, aleart out of range options, otherwise log all option's item list
+    return outOfRangeOptionList.length === 0 ? window.alert(`These are your selected items: [${inRangeItemList.toString()}]`) : window.alert(`You are not with-in rage for these options: [${_.map(outOfRangeOptionList, maxAndMinInput)}]`);
   };
 
+
   render () {
-    console.log('selection storage ==>', this.state.selectionStorage)
-    console.log('main options storage ==>', this.state.itemOptions)
     // check if data from API returned and set to state yet, if yes render elements otherwise render null
     return this.state.itemOptions ?
     // pass down options state, add and minus function to child component
