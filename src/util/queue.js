@@ -22,7 +22,6 @@ class Queue {
     } else {
       delete this.storage[this.headTracker];
       this.headTracker++;
-      // this.tailTracker--;
       this.length--;
     }
     return dequeued;

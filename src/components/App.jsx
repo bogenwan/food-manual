@@ -25,7 +25,7 @@ class App extends Component {
   };
 
   // this function will start getting data from api before component render
-  componentWillMount () {
+  componentDidMount () {
     // assign this to context to retain scope when being excecute bt axios
     let context = this;
     axios.get('/getData')
@@ -122,6 +122,9 @@ class App extends Component {
 
 
   render () {
+    const totalPriceClick = () => {
+      this.checkOptionsWithinRange(this.state.price)
+    };
     // check if data from API returned and set to state yet, if yes render elements otherwise render null
     return this.state.itemOptions ?
     // pass down options state, add and minus function to child component
@@ -130,7 +133,7 @@ class App extends Component {
           <h1 className="food-name">
             {this.state.name}
           </h1>
-          <span className="total-price" onClick={() =>{this.checkOptionsWithinRange(this.state.price)}}>
+          <span className="total-price" onClick={totalPriceClick}>
             {this.state.price}
           </span>
         </header>
