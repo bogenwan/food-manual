@@ -1,6 +1,6 @@
-# food-manual
+# food-menu
 
->This is the most awesome manual ever!
+>This is the most awesome menu ever!
 
 ## Team
 
